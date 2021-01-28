@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base href="/"></base>
+  <title>Custom elems</title>
+  <script src="angular-custom-elements/custom-button-element.js">
+  </script>
+  <script src="blue.js">
+  </script>
+</head>
+
+<body>
+  <main id="app">
+    <blue-buy></blue-buy>
+    <blue-basket></blue-basket>
+    <jb-button label="Banankaka"></jb-button>
+  </main>
+  <script>
+    const jbButton = document.querySelector('jb-button');
+    jbButton.addEventListener('action', (event) => {
+      console.log('Got jb-button event', event);
+    })
+    const blueBuy = document.querySelector('blue-buy');
+    blueBuy.addEventListener('blue:basket:changed', (event) => {
+      console.log('Got blue:basket:changed event', event);
+      jbButton.setAttribute('label', `${event.detail.info}`)
+    })
+    console.log("Started")
+  </script>
+</body>
+
+</html>
