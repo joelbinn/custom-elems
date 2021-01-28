@@ -1,32 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="se">
 
-<head>
-  <base href="/"></base>
-  <title>Custom elems</title>
-  <script src="angular-custom-elements/custom-button-element.js">
-  </script>
-  <script src="blue.js">
-  </script>
-</head>
+  <head>
+    <base href="/">
+    <title>Micro Frontends</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap"
+          rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Quicksand', sans-serif;
+      }
 
-<body>
-  <main id="app">
-    <blue-buy></blue-buy>
-    <blue-basket></blue-basket>
-    <jb-button label="Banankaka"></jb-button>
-  </main>
-  <script>
-    const jbButton = document.querySelector('jb-button');
-    jbButton.addEventListener('action', (event) => {
-      console.log('Got jb-button event', event);
-    })
-    const blueBuy = document.querySelector('blue-buy');
-    blueBuy.addEventListener('blue:basket:changed', (event) => {
-      console.log('Got blue:basket:changed event', event);
-      jbButton.setAttribute('label', `${event.detail.info}`)
-    })
-    console.log("Started")
+      button {
+        color: #5c3c99;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-family: 'Quicksand', sans-serif;
+        margin-bottom: 0.5rem;
+      }
+
+      button:hover, button:focus {
+        color: #9c90b5;
+      }
+
+      button:active {
+        color: #ac4389;
+      }
+
+    </style>
+
+    <style>
+      body {
+        background: dimgrey;
+        padding: 2rem 5rem;
+      }
+    </style>
+    <script src="angular-custom-elements/custom-button-element.js">
+    </script>
+    <script src="blue.js">
+    </script>
+  </head>
+
+  <body>
+    <main id="app">
+      <h1>Example of Micro Frontends</h1>
+      <blue-buy sku="t_porsche"></blue-buy>
+      <blue-basket></blue-basket>
+      <jb-button label="Banankaka"></jb-button>
+      <p class="output">No clicks yet</p>
+    </main>
+    <script>
+      const output = document.querySelector('.output');
+      const jbButton = document.querySelector('jb-button');
+      jbButton.addEventListener('action', (event) => {
+        console.log('Got jb-button event', event);
+        output.textContent = `Number of clicks: ${event.detail}`;
+      })
+      const blueBuy = document.querySelector('blue-buy');
+      blueBuy.addEventListener('blue:basket:changed', (event) => {
+        console.log('Got blue:basket:changed event', event);
+        jbButton.setAttribute('label', `${event.detail.info}`)
+      })
+      console.log("Started")
   </script>
 </body>
 

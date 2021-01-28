@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -11,13 +11,13 @@ import { Component, OnInit, ViewEncapsulation, Input, Output, EventEmitter } fro
 })
 export class ButtonComponent  {
   @Input()
-  label: string = 'A button';
+  label = 'A button';
   @Output()
   readonly action = new EventEmitter<number>();
 
   private numberOfClicks = 0;
 
-  handleClick() {
+  handleClick(): void {
     this.numberOfClicks++;
     this.action.emit(this.numberOfClicks);
   }
